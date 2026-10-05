@@ -50,18 +50,15 @@ if (-not $detectedOrigin) {
 
 $activeOrigin = if ($detectedOrigin) { $detectedOrigin } elseif ($env:OD2_BASE_URL) { $env:OD2_BASE_URL.TrimEnd('/') } else { $null }
 
-$candidateZipUrls = @()
+$candidateZipUrls = @(
+    "https://github.com/One-Day-Developers/screen-dangle/releases/download/v1.0.0/OD2-Screen-Dangle-Windows-v1.0.0.zip"
+)
 if ($activeOrigin) {
-    $candidateZipUrls += "$activeOrigin/screen-dangle/v1.0.0/OD2-Screen-Dangle-Windows-v1.0.0.zip"
     $candidateZipUrls += "$activeOrigin/api/screen-dangle/download?platform=windows-zip"
 }
 $candidateZipUrls += @(
-    "http://localhost:3000/screen-dangle/v1.0.0/OD2-Screen-Dangle-Windows-v1.0.0.zip",
-    "http://localhost:3000/api/screen-dangle/download?platform=windows-zip",
-    "http://127.0.0.1:3000/screen-dangle/v1.0.0/OD2-Screen-Dangle-Windows-v1.0.0.zip",
-    "http://127.0.0.1:3000/api/screen-dangle/download?platform=windows-zip",
-    "$baseUrl/screen-dangle/v1.0.0/OD2-Screen-Dangle-Windows-v1.0.0.zip",
-    "$baseUrl/api/screen-dangle/download?platform=windows-zip"
+    "$baseUrl/api/screen-dangle/download?platform=windows-zip",
+    "http://localhost:3000/api/screen-dangle/download?platform=windows-zip"
 )
 
 $installDir = Join-Path $env:LOCALAPPDATA "Programs\OD2 Screen Dangle"
